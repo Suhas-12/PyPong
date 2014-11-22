@@ -1,15 +1,24 @@
 import pygame
 import random
+import socket
+
+def initNetwork():
+    pass    
 
 
 def drawPad(surface, length, breadth, x, y):
 
-    if x > surface.get_width() - length:
-        x = surface.get_width() - length
-
-    if x < 0:
-        x = 0
+    radius = breadth/2
     
+    if x > surface.get_width() - length - radius:
+        x = surface.get_width() - length - radius
+
+    if x < radius:
+        x = radius
+
+    pygame.draw.circle(surface, pygame.color.Color("cyan"), (x , y + radius), radius)
+    pygame.draw.circle(surface, pygame.color.Color("cyan"), (x + length, y + radius), radius)
+
     pygame.draw.rect(surface, pygame.color.Color("cyan"), [x, y, length, breadth])
 
 def showMenu(surface, width, height):
@@ -310,7 +319,11 @@ def main():
 
         if displayMenu:
             main()
-    
-    pygame.quit()
+        else:
+            pygame.quit()
+    else:
+        pygame.quit()
+
+    return 0
 
 main()
