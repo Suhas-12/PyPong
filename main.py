@@ -250,10 +250,6 @@ def run_game(surface, screen_width, screen_height, velocity):
             else:
                 compScore += 1
 
-            print "\nUser Score: ",userScore
-            print "Computer Score: ",compScore
-    
-
         if ballOut:
             ballX = initBallX
             ballY = initBallY
