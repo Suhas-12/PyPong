@@ -3,6 +3,13 @@ import random
 
 
 def drawPad(surface, length, breadth, x, y):
+
+    if x > surface.get_width() - length:
+        x = surface.get_width() - length
+
+    if x < 0:
+        x = 0
+    
     pygame.draw.rect(surface, pygame.color.Color("cyan"), [x, y, length, breadth])
 
 def showMenu(surface, width, height):
