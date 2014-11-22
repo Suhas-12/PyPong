@@ -152,8 +152,8 @@ def run_game(surface, screen_width, screen_height, velocity):
     screen = surface
 
     ## HIT PAD STUFF
-    length = 105
-    breadth = 15
+    length = 110
+    breadth = 20
     
     marginX = length/2
     marginY = width - length/2
@@ -236,6 +236,11 @@ def run_game(surface, screen_width, screen_height, velocity):
         
         if (mX > marginX and mX < marginY):
             userX = mX - length/2
+
+        ## COMP/P2 - CALCULATE TRAJECTORY AND MOVE
+        targetX = compY - ballY + ballX ## Using: y - y1 = m(x - x1) and
+                                        ## formula for intersection of lines
+        compX = targetX
         
         drawPad(screen, length, breadth, userX, userY)
         drawPad(screen, length, breadth, compX, compY)
@@ -263,6 +268,9 @@ def run_game(surface, screen_width, screen_height, velocity):
             if (userX <= ballX <= userX + length and userY - radius/2 <= ballY <= userY + breadth - radius/2):
                 bounceY *= -1
 
+            if (compX <= ballX <= compX + length and compY - radius/2 <= ballY <= compY + breadth - radius/2):
+                bounceY *= -1
+                
             if (ballX < ballMarginX[0] or ballX > ballMarginX[1]):
                 bounceX *= -1
         
@@ -270,7 +278,7 @@ def run_game(surface, screen_width, screen_height, velocity):
             ballY += velY * bounceY
         
         pygame.draw.circle(screen, pygame.color.Color("cyan"), (ballX, ballY), radius)
-        
+
         pygame.display.update()
 
     return menuStatus
